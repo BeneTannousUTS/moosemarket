@@ -52,6 +52,10 @@ body {
     outline: none;
 }
 
+#searchButton:active {
+    box-shadow: inset -15px -15px 15px rgba(0, 0, 0, .2);
+}
+
 .featured-products {
     text-align: center;
 }
