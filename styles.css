@@ -82,7 +82,7 @@ body {
 
 .product button {
     padding: 10px 20px;
-    background-color: #28a745;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -91,4 +91,6 @@ body {
     outline: none;
 }
 
-/* test change */
+#productButton:active {
+    box-shadow: inset -30px -30px 30px rgba(0, 0, 0, .2);
+}
