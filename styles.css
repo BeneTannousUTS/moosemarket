@@ -16,7 +16,7 @@ body {
 }
 
 .logo img {
-    max-width: 150px; /* Adjust the width as needed */
+    max-height: 50px; /* Adjust the height as needed */
 }
 
 .heading {
@@ -28,6 +28,8 @@ body {
     display: flex;
     width: 100%;
     margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 .search-bar input[type="text"] {
@@ -67,7 +69,7 @@ body {
 }
 
 .product img {
-    max-width: 100%;
+    max-width: 200px;
     height: auto;
     margin-bottom: 10px;
 }
@@ -93,4 +95,42 @@ body {
 
 #productButton:active {
     box-shadow: inset -30px -30px 30px rgba(0, 0, 0, .2);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-image-button {
+    max-width: 50px;
+    margin-left: 20px; 
+    height: auto;
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.cart-badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-10%, -220%);
+    display: none; /* Initially hide the badge */
+}
+
+.cart-image-button {
+    position: relative; /* Ensure the parent container is positioned */
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    z-index: 1000;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
 }

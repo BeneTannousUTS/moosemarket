@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moose Market</title>
+    <title>Cart - Moose Market</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="container">
 
-    <!-- Logo and Search Bar -->
+    <!-- Header -->
     <div class="header">
         <div class="logo">
             <a href="index.php">
@@ -35,22 +35,13 @@
 
     <!-- Heading -->
     <div class="heading">
-        <h1>Welcome to Moose Market!</h1>
-        <p>Find the best deals on your favorite products!</p>
+        <h1>Your Shopping Cart</h1>
     </div>
 
-    <!-- Featured Products -->
-    <div class="featured-products">
-        <h2>Featured Products</h2>
-        <?php include 'featuredProducts.php'; ?>
-    </div>
-
-    <!-- Browse by Category -->
-    <div class="Browse by Category">
-        <h2>Categories</h2>
-        <div class="category">
-            <button id="categoryButton">Produce</button>
-        </div>
+    <!-- Cart Items -->
+    <div class="cart-items">
+        <!-- Placeholder for Cart Items -->
+        <p>Your cart is empty.</p>
     </div>
 
 </div>
