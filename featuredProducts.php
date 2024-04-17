@@ -12,8 +12,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query to fetch featured products with a non-null unit_promo_price
-$sql = "SELECT * FROM products WHERE unit_promo_price IS NOT NULL";
+// Query to fetch top 10 products with the largest discount margin
+$sql = "SELECT *, (unit_price - unit_promo_price) AS discount_margin 
+        FROM products 
+        WHERE unit_promo_price IS NOT NULL 
+        ORDER BY discount_margin DESC 
+        LIMIT 10";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

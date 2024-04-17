@@ -31,26 +31,31 @@
                 <span class="cart-badge">0</span>
             </a>
         </div>
+
+        <!-- Category Buttons -->
+        <div class="category-buttons">
+            <?php
+            $sql = "SELECT DISTINCT category FROM products";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<button class="category-button">' . $row['category'] . '</button>';
+                }
+            }
+            ?>
+        </div>
     </div>
 
     <!-- Heading -->
     <div class="heading">
         <h1>Welcome to Moose Market!</h1>
-        <p>Find the best deals on your favorite products!</p>
     </div>
 
     <!-- Featured Products -->
     <div class="featured-products">
-        <h2>Featured Products</h2>
+        <h2>Check out our best deals!</h2>
         <?php include 'featuredProducts.php'; ?>
-    </div>
-
-    <!-- Browse by Category -->
-    <div class="Browse by Category">
-        <h2>Categories</h2>
-        <div class="category">
-            <button id="categoryButton">Produce</button>
-        </div>
     </div>
 
 </div>
