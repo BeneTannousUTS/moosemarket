@@ -1,5 +1,3 @@
-<?php include 'initDatabase.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,40 +10,7 @@
 
 <div class="container">
 
-    <!-- Logo and Search Bar -->
-    <div class="header">
-        <div class="logo">
-            <a href="index.php">
-                <img src="icons/MooseMarket.png" alt="Moose Market Logo">
-            </a>
-        </div>
-
-        <div class="search-bar">
-            <input type="text" placeholder="Search for products...">
-            <button id="searchButton">Search</button>
-        </div>
-
-        <div class="cart-button">
-            <a href="cart.php" style="position: relative;">
-                <img class="cart-image-button" src="icons/cart.png" alt="Cart" id="addToCartButton">
-                <span class="cart-badge">0</span>
-            </a>
-        </div>
-
-        <!-- Category Buttons -->
-        <div class="category-buttons">
-            <?php
-            $sql = "SELECT DISTINCT category FROM products";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '<button class="category-button">' . $row['category'] . '</button>';
-                }
-            }
-            ?>
-        </div>
-    </div>
+    <?php include 'header.php'; ?>
 
     <!-- Heading -->
     <div class="heading">

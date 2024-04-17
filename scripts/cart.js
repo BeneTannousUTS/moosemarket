@@ -1,25 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cartBadge = document.querySelector('.cart-badge');
-
-    let cartCount = 0;
+    let cartCount = 0; // Move cartCount to the outer scope
 
     const updateCartBadge = () => {
-        cartBadge.textContent = cartCount;
-        cartBadge.style.display = cartCount > 0 ? 'inline-block' : 'none';
+        fetch('getCartTotal.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    cartCount = data.totalQuantity; // Update cartCount here
+                    cartBadge.textContent = cartCount;
+                    cartBadge.style.display = cartCount > 0 ? 'inline-block' : 'none';
+                } else {
+                    console.error('Error fetching cart total:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
+
+    // Call updateCartBadge once initially
+    updateCartBadge();
+
+    setInterval(updateCartBadge, 100);
 
     const addToCart = (productId, inStockQuantity) => {
         if (cartCount < inStockQuantity) {
-            cartCount++;
-            updateCartBadge();
-            fetchProductDetails(productId);
+            // Check if the product is already in the cart
+            fetch('checkProductInCart.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `productId=${productId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.exists) {
+                    // Increment the quantity in the cart
+                    updateProductQuantity(productId, 1);
+                } else if (data.success && !data.exists) {
+                    // Add new product to the cart
+                    addNewProductToCart(productId);
+                } else {
+                    console.error('Error checking product in cart:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         } else {
             alert('Cannot add more than available in stock!');
         }
     };
 
+    const addNewProductToCart = (productId) => {
+        fetchProductDetails(productId)
+        .then(product => {
+            sendToCart(product);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    };
+
+    const updateProductQuantity = (productId, quantity) => {
+        fetch('updateProductQuantity.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `productId=${productId}&quantity=${quantity}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Product quantity updated successfully.');
+                updateCartBadge();
+            } else {
+                console.error('Error updating product quantity:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    };
+
     const fetchProductDetails = (productId) => {
-        fetch('getProductDetails.php', {
+        return fetch('getProductDetails.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -29,13 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                sendToCart(data.product);
+                return data.product;
             } else {
-                console.error('Error fetching product details:', data.error);
+                throw new Error(data.error);
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
         });
     };
 
@@ -51,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data.success) {
                 console.log('Product added to cart successfully.');
+                updateCartBadge();
             } else {
                 console.error('Error adding product to cart:', data.error);
             }

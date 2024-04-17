@@ -1,8 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "assignment_1";
+include 'config.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -21,6 +18,7 @@ $sql = "SELECT *, (unit_price - unit_promo_price) AS discount_margin
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
+    echo '<div class="featured-products-container">';
     // Output data of each row
     while($row = $result->fetch_assoc()) {
         echo '<div class="product">';
@@ -29,13 +27,14 @@ if ($result->num_rows > 0) {
         
         // Display unit_price with strikethrough font
         echo '<p><del>$' . $row['unit_price'] . '</del> </p> ';
-        echo '<p><strong style="font-size: 24px;">$' . $row['unit_promo_price'] . '</strong></p>';
+        echo '<p id="promo-price"><strong style="font-size: 24px;">$' . $row['unit_promo_price'] . '</strong></p>';
         echo '<p style="font-size: 10px;">' . $row['in_stock'] . ' in stock.</p>';
         
         // Add unique ID to button
         echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="' . $row['in_stock'] . '">Add to Cart</button>';
         echo '</div>';
     }
+    echo '</div>'; // Close featured-products-container
 } else {
     echo '<p>No featured products available.</p>';
 }
