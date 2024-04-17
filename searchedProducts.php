@@ -25,12 +25,13 @@ $conn->close();
 
 <?php
 if ($result->num_rows > 0) {
-    echo '<div class="product-container">';
+    echo '<div class="product-list">';
     while($row = $result->fetch_assoc()) {
         echo '<div class="product">';
         echo '<img src="productImgs/' . $row['prod_ID'] . '.png" alt="' . $row['prod_name'] . '">';
         echo '<h3>' . $row['prod_name'] . '</h3>';
         echo '<h3 id="price">$' . $row['unit_price'] . '</h3>';
+        echo '<p style="font-size: 10px;">' . $row['in_stock'] . ' in stock.</p>';
         echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="' . $row['in_stock'] . '">Add to Cart</button>';
         echo '</div>';
     }

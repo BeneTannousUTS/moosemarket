@@ -12,27 +12,8 @@
 
 <div class="container">
 
-    <!-- Header -->
-    <div class="header">
-        <div class="logo">
-            <a href="index.php">
-                <img src="icons/MooseMarket.png" alt="Moose Market Logo">
-            </a>
-        </div>
-
-        <div class="search-bar">
-            <input type="text" placeholder="Search for products...">
-            <button id="searchButton">Search</button>
-        </div>
-
-        <div class="cart-button">
-            <a href="cart.php" style="position: relative;">
-                <img class="cart-image-button" src="icons/cart.png" alt="Cart" id="addToCartButton">
-                <span class="cart-badge">0</span>
-            </a>
-        </div>
-    </div>
-
+    <?php include 'header.php'; ?>
+    
     <!-- Heading -->
     <div class="heading">
         <h1>Your Shopping Cart</h1>

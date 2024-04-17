@@ -18,7 +18,7 @@ $sql = "SELECT *, (unit_price - unit_promo_price) AS discount_margin
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo '<div class="featured-products-container">';
+    echo '<div class="product-list">';
     // Output data of each row
     while($row = $result->fetch_assoc()) {
         echo '<div class="product">';

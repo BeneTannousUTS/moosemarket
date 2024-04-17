@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -28,7 +28,6 @@ body {
     display: flex;
     width: 100%;
     margin-bottom: 20px;
-    margin-left: 20px;
     margin-top: 20px;
 }
 
@@ -40,6 +39,12 @@ body {
     border: 1px solid #ccc;
     font-size: 18px;
     outline: none;
+}
+
+.search-bar form {
+    display: flex;
+    width: 100%;
+    margin: 20px;
 }
 
 .search-bar button {
@@ -74,13 +79,14 @@ body {
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 .product-container {
     display: flex;
     flex-wrap: wrap;
-    width: 100%; /* Make sure the container takes full width */
+    width: 100%; 
+    justify-content: center;
 }
 
 .product {
@@ -146,7 +152,7 @@ body {
 
 .cart-image-button {
     max-width: 50px;
-    margin-left: 20px;
+    margin-right: 20px;
     height: auto;
     cursor: pointer;
 }
@@ -166,13 +172,20 @@ body {
 
 .category-buttons {
     display: flex;
+    justify-content: space-between; 
     gap: 10px;
     margin-top: 10px;
     width: 100%;
 }
 
+.category-link {
+    flex-grow: 1; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
 .category-button {
-    flex: 1;
+    width: 100%;
     padding: 8px 16px;
     background-color: #007bff;
     color: white;
@@ -189,10 +202,4 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-}
-
-.featured-products-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }

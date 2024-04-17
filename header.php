@@ -19,7 +19,7 @@ include 'initTables.php';
     </div>
 
     <div class="cart-button">
-        <a href="cart.php" style="position: relative;">
+        <a href="cart.php">
             <img class="cart-image-button" src="icons/cart.png" alt="Cart" id="addToCartButton">
             <span class="cart-badge">
                 <?php echo isset($_SESSION['cartCount']) ? $_SESSION['cartCount'] : 0; ?>
@@ -37,7 +37,7 @@ include 'initTables.php';
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $category = $row['category'];
-                echo '<a href="search.php?category=' . urlencode($category) . '"><button class="category-button">' . $category . '</button></a>';
+                echo '<a href="search.php?category=' . urlencode($category) . '" class="category-link"><button class="category-button">' . $category . '</button></a>';
             }
         }
     ?>

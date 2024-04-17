@@ -36,6 +36,7 @@ if ($result->num_rows > 0) {
         echo '<img src="productImgs/' . $row['prod_ID'] . '.png" alt="' . $row['prod_name'] . '">';
         echo '<h3>' . $row['prod_name'] . '</h3>';
         echo '<p id="price">$' . $row['unit_price'] . '</p>';
+        echo '<p style="font-size: 10px;">' . $row['in_stock'] . ' in stock.</p>';
         echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="' . $row['in_stock'] . '">Add to Cart</button>';
         echo '</div>';
     }
