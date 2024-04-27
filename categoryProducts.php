@@ -1,7 +1,6 @@
 <?php
 include 'config.php';
 
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -36,7 +35,12 @@ if ($result->num_rows > 0) {
         echo '<div class="product">';
         echo '<img src="productImgs/' . $row['prod_ID'] . '.png" alt="' . $row['prod_name'] . '">';
         echo '<h3>' . $row['prod_name'] . '</h3>';
-        echo '<p id="price">$' . number_format($row['unit_price'], 2) . '</p>';
+        if($row['unit_promo_price']  != null) {
+            echo '<p><del>$' . $row['unit_price'] . '</del></p>';
+            echo '<p id="promo-price"><strong style="font-size: 24px;">$' . number_format($row['unit_promo_price'], 2) . '</strong></p>';
+        } else {
+            echo '<p id="price">$' . number_format($row['unit_price'], 2) . '</p>';
+        }
         echo '<p style="font-size: 10px;">' . $row['in_stock'] . ' in stock.</p>';
         echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="' . $row['in_stock'] . '">Add to Cart</button>';
         echo '</div>';

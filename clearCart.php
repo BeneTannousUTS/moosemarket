@@ -13,7 +13,8 @@ if ($conn->connect_error) {
 $sql = "DELETE FROM order_details";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Cart cleared successfully";
+    header("Location: index.php");
+            exit;
 } else {
     echo "Error clearing cart: " . $conn->error;
 }

@@ -22,8 +22,8 @@
     <!-- Include cart items -->
     <?php include 'cartProducts.php'; ?>
 
-   <!-- Total price calculation and display -->
-   <div class="total-price">
+    <!-- Total price calculation and display -->
+    <div class="total-price">
         <?php
         // Fetch the prices of individual items from the order_details table
         $sql = "SELECT SUM(quantity * price) AS total_price FROM order_details";
@@ -32,25 +32,32 @@
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $totalPrice = $row['total_price'];
-            echo "<p><strong>Total Price: $" . number_format($totalPrice, 2) . "</strong></p>";
 
             // Get the count of items in the cart
             $itemCountQuery = "SELECT COUNT(*) AS itemCount FROM order_details";
             $itemCountResult = $conn->query($itemCountQuery);
             $itemCountRow = $itemCountResult->fetch_assoc();
             $itemCount = $itemCountRow['itemCount'];
+
+            // Echo out the total price
+            echo "<p><strong>Total Price: $" . number_format($totalPrice, 2) . "</strong></p>";
+            echo "<form id='clearCartForm' action='clearCart.php' method='post'>";
+            echo "<div class='clear-cart-button'>";
+            echo "<button type='button' onclick='confirmClearCart()'>Clear Cart</button>";
+            echo "</div>";
+            echo "</form>";
         } else {
-            echo "<p><strong>Total Price: $0.00</strong></p>";
-            $itemCount = 0; // If no items found, set count to 0
+            // If no items found, set count to 0
+            $itemCount = 0;
         }
         ?>
-        
-        <!-- Checkout form if there are items in the cart -->
-        <?php if ($itemCount > 0) : ?>
-            <form action="checkout.php" method="get">
-                <input type="hidden" name="items" value='<?php echo serialize($_SESSION["shopping_cart"]); ?>'>
-                <input type="hidden" name="totalPrice" value="<?php echo $totalPrice; ?>">
-                
+    </div>
+
+    <!-- Checkout form if there are items in the cart -->
+    <?php if ($itemCount > 0) : ?>
+        <form action="checkout.php" method="get">
+
+            <div class="checkout-form">
                 <label for="firstName">First Name:</label>
                 <input type="text" id="firstName" name="firstName" required>
                 
@@ -69,15 +76,23 @@
                 <br>
                 
                 <input id="checkoutButton" type="submit" value="Check Out">
-            </form>
-            
-        <!-- Display an error message if no items were found in the cart -->
-        <?php else : ?>
-            <p>No Items Found! Please add some products to your shopping cart.</p>
-        <?php endif; ?>
-    </div>
+            </div>
+        </form>
+        
+    <!-- Display an error message if no items were found in the cart -->
+    <?php else : ?>
+        <p>No Items Found! Please add some products to your shopping cart.</p>
+    <?php endif; ?>
 </div>
 <script src="scripts/cartBadge.js"></script>
 <script src="scripts/validateDetails.js"></script>
+<script>
+    function confirmClearCart() {
+        if (confirm('Are you sure you want to clear your cart?')) {
+            // If user confirms, submit the form
+            document.getElementById('clearCartForm').submit();
+        }
+    }
+</script>
 </body>
 </html>
