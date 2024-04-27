@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
         
         // Display unit_price with strikethrough font
         echo '<p><del>$' . $row['unit_price'] . '</del> </p> ';
-        echo '<p id="promo-price"><strong style="font-size: 24px;">$' . $row['unit_promo_price'] . '</strong></p>';
+        echo '<p id="promo-price"><strong style="font-size: 24px;">$' . number_format($row['unit_promo_price'], 2) . '</strong></p>';
         echo '<p style="font-size: 10px;">' . $row['in_stock'] . ' in stock.</p>';
         
         // Add unique ID to button

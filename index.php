@@ -25,7 +25,8 @@
 
 </div>
 
-<script src="scripts/cart.js"></script>
-
+<script src="scripts/cartBadge.js"></script>
+<script src="scripts/addToCart.js"></script>
+<script src="scripts/checkInStock.js"></script>
 </body>
 </html>
