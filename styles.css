@@ -69,6 +69,10 @@ body {
     text-align: center;
 }
 
+.all-products {
+    text-align: center;
+}
+
 #promo-price{
     font-size: 24px;
     color: #ff0000;
@@ -142,6 +146,12 @@ body {
 
 .productButton:active {
     box-shadow: inset -5px -5px 5px rgba(0, 0, 0, .2);
+}
+
+.productButton[disabled] {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
 }
 
 .header {
@@ -355,4 +365,52 @@ label {
 .button-container {
     display: flex;
     justify-content: space-between;
+}
+
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23212121'%3E%3Cpath d='M10 12L5 7h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 15px;
+}
+
+input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    outline: none;
+}
+
+#confirm-order {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+#confirm-order:hover {
+    background-color: #0056b3;
+}
+
+#confirm-order:active {
+    background-color: #004080;
 }

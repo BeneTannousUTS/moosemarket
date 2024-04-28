@@ -28,10 +28,18 @@ if ($result->num_rows > 0) {
         // Display unit_price with strikethrough font
         echo '<p><del>$' . $row['unit_price'] . '</del> </p> ';
         echo '<p id="promo-price"><strong style="font-size: 24px;">$' . number_format($row['unit_promo_price'], 2) . '</strong></p>';
-        echo '<p style="font-size: 10px;">' . $row['in_stock'] . ' in stock.</p>';
         
-        // Add unique ID to button
-        echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="' . $row['in_stock'] . '">Add to Cart</button>';
+        // Check if the item is out of stock
+        if ($row['in_stock'] <= 0) {
+            echo '<p class="outOfStockText">Out of Stock</p>';
+            // Disable the button and add a data attribute for identifying the out-of-stock status
+            echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="0" disabled>Add to Cart</button>';
+        } else {
+            echo '<p style="font-size: 10px;">' . $row['in_stock'] . ' in stock.</p>';
+            // Add unique ID to button and set data attribute for in-stock quantity
+            echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="' . $row['in_stock'] . '">Add to Cart</button>';
+        }
+        
         echo '</div>';
     }
     echo '</div>'; // Close featured-products-container
@@ -42,3 +50,5 @@ if ($result->num_rows > 0) {
 // Close connection
 $conn->close();
 ?>
+
+<script src="scripts/outOfStockButton.js"></script>

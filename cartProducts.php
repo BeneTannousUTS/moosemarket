@@ -28,6 +28,7 @@ if ($result->num_rows > 0) {
         echo '<input id="quantity_' . $row['prod_ID'] . '" type="number" name="quantity" value="' . $row['quantity'] . '" min="0" max="' 
             . $row['in_stock'] . '" onchange="submitForm(' . $row['prod_ID'] . ')">'; // Input field for quantity with maximum set to in_stock value
         echo '</form>';
+        echo '<p id="cartItemPriceTotal">$' . number_format(($row['price'] * $row['quantity']), 2) . '</p>';
         echo '</div>';
     }
     echo '</div>'; // close cart-product-list
@@ -36,6 +37,17 @@ if ($result->num_rows > 0) {
 
 <script>
     function submitForm(productId) {
+        var quantityInput = document.getElementById('quantity_' + productId);
+        var maxStock = quantityInput.getAttribute('max');
+        var currentStock = parseInt(maxStock);
+        var enteredQuantity = parseInt(quantityInput.value);
+
+        // Ensure the entered quantity does not exceed the available stock
+        if (enteredQuantity > currentStock) {
+            quantityInput.value = currentStock;
+        }
+
+        // Submit the form
         document.getElementById('updateForm_' + productId).submit();
     }
 </script>

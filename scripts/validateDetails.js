@@ -1,34 +1,29 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const firstNameInput = document.getElementById("firstName");
-    const lastNameInput = document.getElementById("lastName");
-    const emailInput = document.getElementById("email");
-    const phoneInput = document.getElementById("phone");
-    const addressInput = document.getElementById("address");
-    const checkoutButton = document.getElementById("checkoutButton");
+function validateForm() {
+    // Get form fields
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var streetAddress = document.getElementById("streetAddress").value;
+    var postcode = document.getElementById("postcode").value;
+    var suburb = document.getElementById("suburb").value;
+    var state = document.getElementById("state").value;
 
-    // Function to check if all required fields are filled
-    function checkFormValidity() {
-        const firstNameValid = firstNameInput.value.trim() !== "";
-        const lastNameValid = lastNameInput.value.trim() !== "";
-        const emailValid = emailInput.value.trim() !== "";
-        const phoneValid = phoneInput.value.trim() !== "";
-        const addressValid = addressInput.value.trim() !== "";
-
-        // Enable checkout button if all fields are filled, otherwise disable it
-        if (firstNameValid && lastNameValid && emailValid && phoneValid && addressValid) {
-            checkoutButton.disabled = false;
-        } else {
-            checkoutButton.disabled = true;
-        }
+    // Perform validation
+    if (
+        firstName !== "" &&
+        lastName !== "" &&
+        email !== "" &&
+        phone !== "" &&
+        streetAddress !== "" &&
+        postcode !== "" &&
+        suburb !== "" &&
+        state !== ""
+    ) {
+        // Enable the button if all fields are filled
+        document.getElementById("checkoutButton").disabled = false;
+    } else {
+        // Disable the button if any field is empty
+        document.getElementById("checkoutButton").disabled = true;
     }
-
-    // Add event listeners to input fields to check validity on input change
-    firstNameInput.addEventListener("input", checkFormValidity);
-    lastNameInput.addEventListener("input", checkFormValidity);
-    emailInput.addEventListener("input", checkFormValidity);
-    phoneInput.addEventListener("input", checkFormValidity);
-    addressInput.addEventListener("input", checkFormValidity);
-
-    // Check form validity initially
-    checkFormValidity();
-});
+}

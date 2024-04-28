@@ -12,6 +12,21 @@
 
     <?php include 'header.php'; ?>
 
+    <!-- Category Buttons -->
+    <div class="category-buttons">
+        <?php
+            $sql = "SELECT DISTINCT category FROM products";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $category = $row['category'];
+                    echo '<a href="search.php?category=' . urlencode($category) . '" class="category-link"><button class="category-button">' . $category . '</button></a>';
+                }
+            }
+        ?>
+    </div>
+
     <!-- Heading -->
     <div class="heading">
         <h1>Welcome to Moose Market!</h1>
@@ -21,6 +36,12 @@
     <div class="featured-products">
         <h2>Check out our best deals!</h2>
         <?php include 'featuredProducts.php'; ?>
+    </div>
+
+    <!-- All Products -->
+    <div class="all-products">
+        <h2>All Products</h2>
+        <?php include 'allProducts.php'; ?>
     </div>
 
 </div>

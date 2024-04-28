@@ -24,8 +24,6 @@ $stmt->bind_param("s", $selectedCategory);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Close connection
-$conn->close();
 ?>
 
 <?php
@@ -41,12 +39,27 @@ if ($result->num_rows > 0) {
         } else {
             echo '<p id="price">$' . number_format($row['unit_price'], 2) . '</p>';
         }
-        echo '<p style="font-size: 10px;">' . $row['in_stock'] . ' in stock.</p>';
-        echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="' . $row['in_stock'] . '">Add to Cart</button>';
+
+        // Check if the item is out of stock
+        if ($row['in_stock'] <= 0) {
+            echo '<p class="outOfStockText">Out of Stock</p>';
+            // Disable the button and add a data attribute for identifying the out-of-stock status
+            echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="0" disabled>Add to Cart</button>';
+        } else {
+            echo '<p style="font-size: 10px;">' . $row['in_stock'] . ' in stock.</p>';
+            // Add unique ID to button and set data attribute for in-stock quantity
+            echo '<button class="productButton" data-product-id="' . $row['prod_ID'] . '" data-in-stock="' . $row['in_stock'] . '">Add to Cart</button>';
+        }
+
         echo '</div>';
     }
     echo '</div>'; // Close product-list
 } else {
     echo '<p>No products found in this category.</p>';
 }
+
+// Close connection
+$conn->close();
 ?>
+
+<script src="scripts/outOfStockButton.js"></script>

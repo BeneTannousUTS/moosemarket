@@ -58,6 +58,21 @@ $conn->close();
 
     <!-- Logo and Search Bar -->
     <?php include 'header.php'; ?>
+    
+    <!-- Category Buttons -->
+    <div class="category-buttons">
+        <?php
+            $sql = "SELECT DISTINCT category FROM products";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $category = $row['category'];
+                    echo '<a href="search.php?category=' . urlencode($category) . '" class="category-link"><button class="category-button">' . $category . '</button></a>';
+                }
+            }
+        ?>
+    </div>
 
     <!-- Search Results or Category Title -->
     <div class="heading">
